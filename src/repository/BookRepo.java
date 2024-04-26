@@ -5,6 +5,8 @@ import model.Book;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.UUID;
 
 public class BookRepo extends BaseRepo<Book>{
     public static final BookRepo bookRepo = new BookRepo();
@@ -69,5 +71,24 @@ public class BookRepo extends BaseRepo<Book>{
         }
 
         return list;
+    }
+
+    public void setAmount(UUID bookId, int i) {
+        for (Book book : data) {
+            if (book.getId().equals(bookId)) {
+                book.setAmount(book.getAmount() - i);
+                return;
+            }
+        }
+    }
+
+    public Optional<Book> getByCode(int code) {
+        for (Book book : getActives()) {
+            if (book.getCode().equals(code)){
+                return Optional.of(book);
+            }
+        }
+
+        return Optional.empty();
     }
 }

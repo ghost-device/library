@@ -34,7 +34,7 @@ public class RentService extends BaseService<Rent, RentRepo> {
         return "Successfully!";
     }
 
-    private int getDaysCount(LocalDate date1, LocalDate date2){
+    public int getDaysCount(LocalDate date1, LocalDate date2){
         int i = 0;
         while (date1.isBefore(date2)){
             i++;

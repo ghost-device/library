@@ -83,4 +83,18 @@ public class Rent extends BaseModel {
     public void setBookId(UUID bookId) {
         this.bookId = bookId;
     }
+
+    @Override
+    public String toString() {
+        return "Rent { " +
+                "closedDate = " + closedDate +
+                " , status = " + status +
+                " , dueDate = " + dueDate +
+                " , fine = " + fine +
+                " , totalPrice = " + totalPrice +
+                " , bookId = " + bookId +
+                " , name = '" + name + '\'' +
+                " , phoneNum = '" + phoneNum + '\'' +
+                '}';
+    }
 }

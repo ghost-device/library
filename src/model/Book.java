@@ -3,21 +3,23 @@ package model;
 import java.time.LocalDate;
 
 public class Book extends BaseModel {
-    private static Integer codeGenerator = 10000;
+    private static Integer codeGenerator = 10101;
 
     private String title;
     private String author;
     private Integer numOfPages;
     private LocalDate publishDate;
+    private Double dailyRentCharge;
     private Integer writtenYear;
     private Integer amount;
     private Integer code = codeGenerator++;
 
-    public Book(String title, String author, Integer numOfPages, LocalDate publishDate, Integer writtenYear, Integer amount) {
+    public Book(String title, String author, Integer numOfPages, LocalDate publishDate, Double dailyRentCharge, Integer writtenYear, Integer amount) {
         this.title = title;
         this.author = author;
         this.numOfPages = numOfPages;
         this.publishDate = publishDate;
+        this.dailyRentCharge = dailyRentCharge;
         this.writtenYear = writtenYear;
         this.amount = amount;
     }
@@ -84,5 +86,26 @@ public class Book extends BaseModel {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public Double getDailyRentCharge() {
+        return dailyRentCharge;
+    }
+
+    public void setDailyRentCharge(Double dailyRentCharge) {
+        this.dailyRentCharge = dailyRentCharge;
+    }
+
+    @Override
+    public String toString() {
+        return "Book {" +
+                " title = '" + title + '\'' +
+                " , author = '" + author + '\'' +
+                " , numOfPages = " + numOfPages +
+                " , publishDate = " + publishDate +
+                " , writtenYear = " + writtenYear +
+                " , amount = " + amount +
+                " , code = " + code +
+                " }";
     }
 }
