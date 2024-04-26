@@ -18,16 +18,17 @@ public class RentService extends BaseService<Rent, RentRepo> {
 
     private final BookService bookService = BookService.getInstance();
 
-    public ArrayList<Rent> getRentsByPhone(String phone){
-        return repo.getByPhone(phone);
+    public ArrayList<Rent> getRentsByPhoneAndStatus(String phone, Status status){
+        return repo.getByPhoneAndStatus(phone, status);
     }
 
     public String closeRent(UUID rentId){
         LocalDate now = LocalDate.now();
         Rent rent = findById(rentId);
-        if (!rent.getDueDate().isBefore(now)){
+        if (!rent.getDueDate().isBefore(now.plusDays(1))){
+            repo.close(rentId);
             return "Fine: " + getDaysCount(rent.getDueDate(), now) *
-                    bookService.findById(rent.getBookId()).getAmount();
+                    bookService.findById(rent.getBookId()).getDailyRentCharge();
         }
 
         repo.close(rentId);

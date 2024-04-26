@@ -7,6 +7,7 @@ import model.Status;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 import static controller.Main.*;
@@ -45,16 +46,24 @@ public class RentController {
         System.out.print("Enter phone -> ");
         String phone = scanStr.nextLine();
 
+        ArrayList<Rent> rentsByPhoneAndStatus = rentService.getRentsByPhoneAndStatus(phone, Status.OPEN);
+
+        if (rentsByPhoneAndStatus.isEmpty()) {
+            System.out.println("Not found!");
+            rentMenu();
+        }
+
         int i = 1;
-        for (Rent rent : rentService.getRentsByPhone(phone)) {
-            System.out.println(i++ + ". " +rent);
+        for (Rent rent : rentsByPhoneAndStatus) {
+            System.out.println(i++ + ". " + rent);
         }
 
         System.out.print("Choose -> ");
-        int ans = scanNum.nextInt();
+        int ans = scanNum.nextInt() - 1;
 
-        Rent rent = rentService.getRentsByPhone(phone).get(ans);
-        rentService.closeRent(rent.getId());
+        Rent rent = rentService.getRentsByPhoneAndStatus(phone, Status.OPEN).get(ans);
+        System.out.println(rentService.closeRent(rent.getId()));
+
         bookService.setAmountOfBook(rent.getBookId(), -1);
 
         rentMenu();
@@ -65,6 +74,11 @@ public class RentController {
         int code = scanNum.nextInt();
 
         Book book = bookService.getByCode(code);
+
+        if (Objects.isNull(book)) {
+            System.out.println("Not Found!");
+            open();
+        }
 
         Rent rent = rentCreate(book.getId());
         bookService.setAmountOfBook(book.getId(), 1);

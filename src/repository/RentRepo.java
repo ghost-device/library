@@ -15,10 +15,10 @@ public class RentRepo extends BaseRepo<Rent> {
     public RentRepo() {
     }
 
-    public ArrayList<Rent> getByPhone(String phone){
+    public ArrayList<Rent> getByPhoneAndStatus(String phone, Status status){
         ArrayList<Rent> list = new ArrayList<>();
         for (Rent rent : getActives()) {
-            if (rent.getPhoneNum().equals(phone)) {
+            if (rent.getPhoneNum().equals(phone) && rent.getStatus() == status) {
                 list.add(rent);
             }
         }
@@ -29,6 +29,7 @@ public class RentRepo extends BaseRepo<Rent> {
     public void close(UUID id){
         for (Rent rent : getActives()) {
             if (rent.getId().equals(id)) {
+                rent.setStatus(Status.CLOSED);
                 rent.setClosedDate(LocalDate.now());
                 return;
             }
