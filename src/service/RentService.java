@@ -60,11 +60,16 @@ public class RentService extends BaseService<Rent, RentRepo> {
         list1.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
 
-        return new ArrayList<>(List.of(list1.getFirst().getKey(), list1.get(1).getKey(), list1.get(2).getKey()));
+        ArrayList<String> topUsers = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, list1.size()); i++) {
+            topUsers.add(list1.get(i).getKey());
+        }
+
+        return topUsers;
     }
 
     public ArrayList<String> getTop3UsersOfMonth(){
@@ -76,16 +81,21 @@ public class RentService extends BaseService<Rent, RentRepo> {
             }
         }
 
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        List<Map.Entry<String, Integer>> list1 = new ArrayList<>(map.entrySet());
 
-        list.sort(new Comparator<Map.Entry<String, Integer>>() {
+        list1.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
 
-        return new ArrayList<>(List.of(list.get(0).getKey(), list.get(1).getKey(), list.get(2).getKey()));
+        ArrayList<String> topUsers = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, list1.size()); i++) {
+            topUsers.add(list1.get(i).getKey());
+        }
+
+        return topUsers;
     }
 
     public ArrayList<String> getTop3UsersOfLast30Day(){
@@ -97,15 +107,19 @@ public class RentService extends BaseService<Rent, RentRepo> {
             }
         }
 
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+        List<Map.Entry<String, Integer>> list1 = new ArrayList<>(map.entrySet());
 
-        list.sort(new Comparator<Map.Entry<String, Integer>>() {
+        list1.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
+                return o2.getValue().compareTo(o1.getValue());
             }
         });
 
-        return new ArrayList<>(List.of(list.get(0).getKey(), list.get(1).getKey(), list.get(2).getKey()));
-    }
+        ArrayList<String> topUsers = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, list1.size()); i++) {
+            topUsers.add(list1.get(i).getKey());
+        }
+
+        return topUsers;        }
 }
