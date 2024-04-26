@@ -1,0 +1,88 @@
+package model;
+
+import java.time.LocalDate;
+
+public class Book extends BaseModel {
+    private static Integer codeGenerator = 10000;
+
+    private String title;
+    private String author;
+    private Integer numOfPages;
+    private LocalDate publishDate;
+    private Integer writtenYear;
+    private Integer amount;
+    private Integer code = codeGenerator++;
+
+    public Book(String title, String author, Integer numOfPages, LocalDate publishDate, Integer writtenYear, Integer amount) {
+        this.title = title;
+        this.author = author;
+        this.numOfPages = numOfPages;
+        this.publishDate = publishDate;
+        this.writtenYear = writtenYear;
+        this.amount = amount;
+    }
+
+    public static Integer getCodeGenerator() {
+        return codeGenerator;
+    }
+
+    public static void setCodeGenerator(Integer codeGenerator) {
+        Book.codeGenerator = codeGenerator;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getNumOfPages() {
+        return numOfPages;
+    }
+
+    public void setNumOfPages(Integer numOfPages) {
+        this.numOfPages = numOfPages;
+    }
+
+    public LocalDate getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(LocalDate publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public Integer getWrittenYear() {
+        return writtenYear;
+    }
+
+    public void setWrittenYear(Integer writtenYear) {
+        this.writtenYear = writtenYear;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+}
